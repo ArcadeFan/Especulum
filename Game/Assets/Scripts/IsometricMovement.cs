@@ -56,6 +56,8 @@ public class IsometricMovement : MonoBehaviour {
         //sis1Obj.transform.LookAt(cam);
 
 
+        
+
         if (Input.anyKey)
             Move();
         if(Input.GetAxis("VerticalKey") >0)
@@ -66,6 +68,12 @@ public class IsometricMovement : MonoBehaviour {
         if (sis0 == false)
         {
             sis0Obj.SetActive(false);
+
+           
+
+
+
+
             //boxcol2D.size = new Vector2(1.6f, 8.11f);
             //boxcol2D.offset = new Vector2(-0.072f, 1.30f);
 
@@ -86,10 +94,6 @@ public class IsometricMovement : MonoBehaviour {
             //sis1img.sprite = sis0img.sprite;
 
 
-
-
-
-
         }
 
         if (sis1 == false)
@@ -101,6 +105,8 @@ public class IsometricMovement : MonoBehaviour {
         {
             sis1Obj.SetActive(true);
 
+            
+            
         }
 
         if (sis0Life >= 0 && sis1Life >= 0)
@@ -109,6 +115,13 @@ public class IsometricMovement : MonoBehaviour {
             {
                 sis0 = !sis0;
                 sis1 = !sis1;
+
+                Sprite tmp = sis0img.sprite;
+                sis0img.sprite = sis1img.sprite;
+                sis1img.sprite = tmp;
+
+
+                //usar bilboard para ver las imagenes a la camara siempre al frente 
 
 
 
