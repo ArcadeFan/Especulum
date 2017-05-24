@@ -15,6 +15,8 @@ public class InventoryObjects {
     public string Descripcion;
     public Sprite sprite;
     public GameObject objeto;
+     
+
 
     public static void Asignar(InventoryObjects de, InventoryObjects a)
     {

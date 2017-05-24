@@ -58,13 +58,25 @@ public class Inventory : MonoBehaviour {
     }
     public void Usar(int slot)
     {
-        if(objetos[slot].objeto !=null)
+
+        InventoryObjects aux = new InventoryObjects();
+
+
+        if (objetos[slot].objeto !=null)
         {
 
             if(objetos[slot].Tipo == Top.consumibles)
             {
 
                 print(objetos[slot].Nombre + " fue usado");
+
+                cantidad[slot]--;
+                if (cantidad[slot] == 0 || cantidad[slot] < 0)
+                {
+                    InventoryObjects.Asignar(objetos[slot], aux);
+
+                }
+
 
             }
             else if(objetos[slot].Tipo == Top.Equipo)

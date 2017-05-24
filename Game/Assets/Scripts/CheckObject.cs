@@ -30,7 +30,12 @@ public class CheckObject : MonoBehaviour {
 
             if(JI.Buscar(ID))
             {
+
                 Destroy(gameObject);
+                
+
+
+
             }
 
         }

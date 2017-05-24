@@ -24,7 +24,9 @@ public class Player : MonoBehaviour
     public Image sis0img;
     public Image sis1img;
 
-    
+    public int money = 0;
+
+
 
 
     public GameObject sis0Obj;
@@ -70,13 +72,12 @@ public class Player : MonoBehaviour
             sis0Obj.SetActive(false);
             boxcol2D.size = new Vector2(1.6f,8.11f);
             boxcol2D.offset = new Vector2(-0.072f, 1.30f);
-
-            sis0img.sprite = sis1img.sprite;
-
-
-
-
-
+                       
+                        /*Sprite tmp = UiImagen1.sprite;
+            UIimage1.sprite = UIimagen2.sprite;
+            UIimage2,sprite = tmp;
+            */
+            
 
         }
         else
@@ -84,26 +85,32 @@ public class Player : MonoBehaviour
             sis0Obj.SetActive(true);
             boxcol2D.size = new Vector2(1.2f, 5.9f);
             boxcol2D.offset = new Vector2(-0.072f, -0.02f);
-
-            sis1img.sprite = sis0img.sprite;
-
-
-
-
-
+                 
+            
 
         }
 
-        if (sis1 == false)
-        {
-            sis1Obj.SetActive(false);
+        /*  if (sis1 == false)
+          {
+              sis1Obj.SetActive(false);
 
-        }
-        else
-        {
-            sis1Obj.SetActive(true);
+              Sprite tmp = sis.sprite;
+              UIimage1.sprite = UIimagen2.sprite;
+              UIimage2,sprite = tmp;
 
-        }
+          }
+          else
+          {
+              sis1Obj.SetActive(true);
+
+              Sprite tmp = UiImagen1.sprite;
+              UIimage1.sprite = UIimagen2.sprite;
+              UIimage2,sprite = tmp;
+
+          }*/
+
+              
+
 
         if (sis0Life >= 0 && sis1Life >= 0)
         {
