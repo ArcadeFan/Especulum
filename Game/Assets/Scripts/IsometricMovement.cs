@@ -52,10 +52,9 @@ public class IsometricMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        //sis0Obj.transform.LookAt(cam);
         //sis1Obj.transform.LookAt(cam);
 
-
+        
         
 
         if (Input.anyKey)
