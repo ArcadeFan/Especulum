@@ -10,19 +10,27 @@ public class IsometricMovement : MonoBehaviour {
 
     Vector3 forward, right;
 
+    
+
+
+    public Image lifebar;
+    public Image specialbar;
 
 
     public Image sis0img;
     public Image sis1img;
 
-
+    public Animator anim;
 
 
     public GameObject sis0Obj;
     public GameObject sis1Obj;
 
-    public int sis0Life = 0;
-    public int sis1Life = 0;
+    //vida de las hermanas
+
+    public float sis0Life = 0.0f;
+    public float sis1Life = 0.0f;
+    public float special = 0.0f;
 
 
     public bool sis0 = false;
@@ -34,6 +42,7 @@ public class IsometricMovement : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
+        
         
 
         sis0 = true;
@@ -54,9 +63,28 @@ public class IsometricMovement : MonoBehaviour {
 
         //sis1Obj.transform.LookAt(cam);
 
-        
-        
 
+        anim.SetFloat("MoveX", Input.GetAxisRaw("HorizontalKey"));
+        anim.SetFloat("MoveY", Input.GetAxisRaw("VerticalKey"));
+
+        if(Input.GetKey(KeyCode.E))
+        {
+            special --;
+
+        }
+
+        
+        if(special <=0)
+        { special = 0; }
+        else if (special >=100)
+        {
+            special = 100;
+        }
+
+        specialbar.fillAmount = special / 100;
+
+
+        //cam.transform.position = Vector3.Lerp(transform.position,)
         if (Input.anyKey)
             Move();
         if(Input.GetAxis("VerticalKey") >0)
@@ -68,7 +96,8 @@ public class IsometricMovement : MonoBehaviour {
         {
             sis0Obj.SetActive(false);
 
-           
+
+            lifebar.fillAmount = sis1Life / 100;
 
 
 
@@ -86,6 +115,9 @@ public class IsometricMovement : MonoBehaviour {
         }
         else
         {
+            lifebar.fillAmount = sis0Life / 100;
+
+
             sis0Obj.SetActive(true);
             //boxcol2D.size = new Vector2(1.2f, 5.9f);
             //boxcol2D.offset = new Vector2(-0.072f, -0.02f);
@@ -142,4 +174,5 @@ public class IsometricMovement : MonoBehaviour {
         transform.position += upMovement;
 
     }
+
 }
