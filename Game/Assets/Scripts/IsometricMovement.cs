@@ -10,8 +10,8 @@ public class IsometricMovement : MonoBehaviour {
 
     Vector3 forward, right;
 
-    
 
+    public bool CanMove;
 
     public Image lifebar;
     public Image specialbar;
@@ -54,6 +54,8 @@ public class IsometricMovement : MonoBehaviour {
         forward.y = 0;
         forward = Vector3.Normalize(forward);
 
+        anim = GetComponent<Animator>();
+
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
 		
 	}
@@ -61,13 +63,21 @@ public class IsometricMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if(!CanMove)
+        {
+            return;
+        }
+
         //sis1Obj.transform.LookAt(cam);
 
+        anim = GetComponentInChildren<Animator>();
+        anim.SetFloat("MoveX", Input.GetAxisRaw("Horizontal"));
+        anim.SetFloat("MoveY", Input.GetAxisRaw("Vertical"));
 
-        anim.SetFloat("MoveX", Input.GetAxisRaw("HorizontalKey"));
-        anim.SetFloat("MoveY", Input.GetAxisRaw("VerticalKey"));
+        Debug.Log(anim.GetFloat("MoveX"));
+        Debug.Log(anim.GetFloat("MoveY"));
 
-        if(Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
             special --;
 
@@ -85,12 +95,19 @@ public class IsometricMovement : MonoBehaviour {
 
 
         //cam.transform.position = Vector3.Lerp(transform.position,)
+
+
+
         if (Input.anyKey)
-            Move();
-        if(Input.GetAxis("VerticalKey") >0)
         {
-            print("arriba");
-        }
+            Move();
+         }
+               
+        
+        
+       
+            
+
 
         if (sis0 == false)
         {
@@ -164,9 +181,9 @@ public class IsometricMovement : MonoBehaviour {
 
     void Move()
     {
-        Vector3 direction = new Vector3(Input.GetAxis("HorizontalKey"), 0, Input.GetAxis("VerticalKey"));
-        Vector3 rightMovement = right * moveSpeed * Time.deltaTime * Input.GetAxis("HorizontalKey");
-        Vector3 upMovement = forward * moveSpeed * Time.deltaTime * Input.GetAxis("VerticalKey");
+        Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 rightMovement = right * moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
+        Vector3 upMovement = forward * moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
         Vector3 heading = Vector3.Normalize(rightMovement + upMovement);
 
         transform.forward = heading;

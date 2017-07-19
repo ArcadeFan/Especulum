@@ -5,10 +5,10 @@ using UnityEngine;
 public class CheckObject : MonoBehaviour {
 
 
-    Inventory JI;
+    public Inventory JI;
     public int ID;
 
-    DBObjects DB;
+    public DBObjects DB;
 
     void Start()
     {
@@ -16,8 +16,19 @@ public class CheckObject : MonoBehaviour {
         JI = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         DB = GameObject.Find("DBObjects").GetComponent<DBObjects>();
     }
+    private void Update()
+    {
 
-    void OnMouseDown()
+        if (Input.GetKeyDown("space"))
+        {
+            print("space key was pressed");
+            Mision();
+
+        }
+
+    }
+
+    void Mision()
     {
 
         for (int i = 0; i < JI.objetos.Length; i++)
@@ -31,7 +42,8 @@ public class CheckObject : MonoBehaviour {
             if(JI.Buscar(ID))
             {
 
-                Destroy(gameObject);
+                //Destroy(gameObject);
+
                 
 
 

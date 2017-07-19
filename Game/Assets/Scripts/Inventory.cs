@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
+    public GameObject inventarioMayor;
+    public GameObject inventarioMenor;
 
     public DBObjects DB;
     public InventoryObjects[] objetos = new InventoryObjects[2];
@@ -56,6 +58,7 @@ public class Inventory : MonoBehaviour {
         }
 
     }
+
     public void Usar(int slot)
     {
 
