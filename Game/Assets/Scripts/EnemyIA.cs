@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyIA : MonoBehaviour {
-    
+
+
+    public int hp;
     public Transform[] points;
     public int destPoint = 0;
     public UnityEngine.AI.NavMeshAgent agent;
@@ -12,6 +14,10 @@ public class EnemyIA : MonoBehaviour {
 
     public bool chase = false;
     public bool patrol = true;
+    public GameObject ebullet;
+    public float projectileSpeed;
+
+    public float cd;
 
     //private NavMeshAgent agent;
 
@@ -27,6 +33,7 @@ public class EnemyIA : MonoBehaviour {
         //agent.autoBraking = false;
 
         GotoNextPoint();
+        hp = 25;
 
     }
 
@@ -34,9 +41,15 @@ public class EnemyIA : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+        Debug.Log(hp);
+
         float distance = Vector3.Distance(transform.position, destination.position);
 
-        //Debug.Log(distance);
+        Debug.Log(cd);
 
         if (chase == true && patrol == false)
         {
@@ -60,14 +73,36 @@ public class EnemyIA : MonoBehaviour {
             }
 
         }
+
+        if (chase==true)
+        {
+
+            Shoot();
+
+            
+
+        }
+      
+         
+
     }
+
+    IEnumerator Example()
+    {
         
-        
+        yield return new WaitForSeconds(3);
+        chase = false;
+        patrol = true;
+        CancelInvoke("Shoot");
 
         
-
-        
+    }
     
+
+
+
+
+
 
     void GotoNextPoint()
     {
@@ -81,6 +116,45 @@ public class EnemyIA : MonoBehaviour {
         // Choose the next point in the array as the destination,
         // cycling to the start if necessary.
         destPoint = (destPoint + 1) % points.Length;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            chase = true;
+            patrol = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+
+            StartCoroutine(Example());
+        }
+
+        if(other.tag=="PBullet")
+        {
+            hp--;
+        }
+        if (other.tag == "PHBullet")
+        {
+            hp-=10;
+        }
+    }
+
+    void Shoot()
+    {
+        cd -= Time.deltaTime;
+        if(cd<=0)
+        {
+            Instantiate(ebullet, transform.position, transform.rotation);
+            cd = 1f;
+        }
+
+
     }
 }
 

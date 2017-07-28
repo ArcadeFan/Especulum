@@ -94,13 +94,17 @@
     <Compile Include="Assets\Scripts\IsometricMovement.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\Mark.cs" />
+    <Compile Include="Assets\Scripts\Menu.cs" />
     <Compile Include="Assets\Scripts\Npc1.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\PlayerBullet.cs" />
+    <Compile Include="Assets\Scripts\PuzzleActivate.cs" />
     <Compile Include="Assets\Scripts\Puzzle_0.cs" />
     <Compile Include="Assets\Scripts\Shop.cs" />
     <Compile Include="Assets\Scripts\SmootCamera.cs" />
     <Compile Include="Assets\Scripts\TextBoxManager.cs" />
     <Compile Include="Assets\Scripts\TextImport.cs" />
+    <Compile Include="Assets\Scripts\bullet.cs" />
     <Compile Include="Assets\Scripts\change_floor.cs" />
     <Compile Include="Assets\zelda\Scripts\Dialogue.cs" />
   </ItemGroup>

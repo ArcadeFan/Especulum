@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Puzzle_0 : MonoBehaviour {
+public class Puzzle_0 : MonoBehaviour
+{
 
-    public float panel1=0;
-    public float panel2=0;
-    public float panel3=0;
+    public float panel1 = 0;
+    public float panel2 = 0;
+    public float panel3 = 0;
 
     public int panel1resp;
     public int panel2resp;
@@ -35,6 +36,8 @@ public class Puzzle_0 : MonoBehaviour {
     public Image panel1respimg;
     public Image panel2respimg;
     public Image panel3respimg;
+    public Image Letrero;
+    public Sprite completeSprite;
 
 
     //lucesitas
@@ -52,38 +55,40 @@ public class Puzzle_0 : MonoBehaviour {
 
 
     // Use this for initialization
-    void Start () {
-		
+    void Start()
+    {
 
 
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (cdcheck > 0)
         {
             cdcheck--;
         }
 
         ///panel 1
-        if (panel1==1 && panelbool1==false)
+        if (panel1 == 1 && panelbool1 == false)
         {
             panel1img.GetComponent<Image>().color = panel1respimg.GetComponent<Image>().color;
             panelbool1 = true;
-            
-            
+
+
 
 
         }
-        else if (panel1 ==2 && panelbool2==false)
+        else if (panel1 == 2 && panelbool2 == false)
         {
             panel1img.GetComponent<Image>().color = panel2respimg.GetComponent<Image>().color;
             panelbool1 = false;
             panelbool2 = true;
 
         }
-        else if(panel1 == 3 && panelbool3 == false)
+        else if (panel1 == 3 && panelbool3 == false)
         {
             panel1img.GetComponent<Image>().color = panel3respimg.GetComponent<Image>().color;
             panelbool1 = false;
@@ -91,11 +96,11 @@ public class Puzzle_0 : MonoBehaviour {
             panelbool3 = true;
 
         }
-        else if(panel1 >=4)
+        else if (panel1 >= 4)
         {
             panel1 = 0;
             panel1img.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
-           
+
             panelbool3 = false;
         }
 
@@ -105,7 +110,7 @@ public class Puzzle_0 : MonoBehaviour {
             panel2img.GetComponent<Image>().color = panel1respimg.GetComponent<Image>().color;
             panelbool1 = true;
 
-            
+
 
 
         }
@@ -130,7 +135,7 @@ public class Puzzle_0 : MonoBehaviour {
             panelbool3 = false;
         }
 
-        
+
         ///panel 3
         if (panel3 == 1 && panelbool1 == false)
         {
@@ -157,7 +162,7 @@ public class Puzzle_0 : MonoBehaviour {
             panelbool3 = false;
             panel3 = 0;
             panel3img.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
-            
+
         }
 
 
@@ -165,7 +170,7 @@ public class Puzzle_0 : MonoBehaviour {
     }
     public void change()
     {
-        
+
         panel1++;
 
 
@@ -174,7 +179,7 @@ public class Puzzle_0 : MonoBehaviour {
     {
 
         panel2++;
-       
+
 
 
 
@@ -189,54 +194,67 @@ public class Puzzle_0 : MonoBehaviour {
     }
     public void check()
     {
-        
-            if (panel1 == panel1resp)
-            {
 
-
-                luz1.GetComponent<Image>().color = new Color32(0, 255, 255, 255);
-
-            }
-            else
-            {
-                luz1.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
-
-            }
-            if (panel2 == panel2resp)
-            {
-
-
-                luz2.GetComponent<Image>().color = new Color32(0, 255, 255, 255);
-
-            }
-            else
-            {
-                luz2.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
-
-            }
-            if (panel3 == panel3resp)
-            {
-
-
-                luz3.GetComponent<Image>().color = new Color32(0, 255, 255, 255);
-
-            }
-            else
-            {
-                luz3.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
-
-            }
-
-        
-
-
-
-        if (panel1==panel1resp && panel2 == panel2resp && panel3==panel3resp)
+        if (panel1 == panel1resp)
         {
-            complete = true;
+
+
+            luz1.GetComponent<Image>().color = new Color32(0, 255, 255, 255);
+
+        }
+        else
+        {
+            luz1.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+
+        }
+        if (panel2 == panel2resp)
+        {
+
+
+            luz2.GetComponent<Image>().color = new Color32(0, 255, 255, 255);
+
+        }
+        else
+        {
+            luz2.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
+
+        }
+        if (panel3 == panel3resp)
+        {
+
+
+            luz3.GetComponent<Image>().color = new Color32(0, 255, 255, 255);
+
+        }
+        else
+        {
+            luz3.GetComponent<Image>().color = new Color32(255, 0, 0, 255);
 
         }
 
 
+
+
+
+        if (panel1 == panel1resp && panel2 == panel2resp && panel3 == panel3resp)
+        {
+
+
+            complete = true;
+            Letrero.sprite = completeSprite;
+            StartCoroutine(Example());
+        }
+
+
     }
+
+
+
+    IEnumerator Example()
+    {
+        print(Time.time);
+        yield return new WaitForSeconds(3);
+        gameObject.SetActive(false);
+    }
+
 }

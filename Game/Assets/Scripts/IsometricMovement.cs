@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class IsometricMovement : MonoBehaviour {
 
     [SerializeField]
+    
     float moveSpeed = 4f;
 
     Vector3 forward, right;
-
+    public GameObject primerdialogo;
 
     public bool CanMove;
 
@@ -19,6 +20,14 @@ public class IsometricMovement : MonoBehaviour {
 
     public Image sis0img;
     public Image sis1img;
+
+    public SpriteRenderer sis1Sprite;
+    public SpriteRenderer sis0Sprite;
+
+    public GameObject bullet;
+    public GameObject bullet0;
+
+
 
     public Animator anim;
 
@@ -38,6 +47,8 @@ public class IsometricMovement : MonoBehaviour {
 
 
     public Transform cam;
+    public Camera came;
+    public float BulletSpeed;
 
     // Use this for initialization
     void Start () {
@@ -57,15 +68,44 @@ public class IsometricMovement : MonoBehaviour {
         anim = GetComponent<Animator>();
 
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        sis1Sprite.GetComponent<SpriteRenderer>();
+        sis0Sprite.GetComponent<SpriteRenderer>();
+
+
+        //sis0img2.GetComponent<SpriteRenderer>();
+        //sis1Obj.GetComponent<SpriteRenderer>();
+
+        StartCoroutine(Example());
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if(!CanMove)
         {
             return;
+        }
+
+        if(sis0Life<=0)
+        {
+            sis1 = true;
+                
+            sis0 = false;
+
+
+            
+
+
+
+        }
+        else if (sis1Life<=0)
+        {
+            sis0 = true;
+            
+
+            sis1 = false;
+           
+
         }
 
         //sis1Obj.transform.LookAt(cam);
@@ -76,6 +116,35 @@ public class IsometricMovement : MonoBehaviour {
 
         Debug.Log(anim.GetFloat("MoveX"));
         Debug.Log(anim.GetFloat("MoveY"));
+
+        if(sis0==true && Input.GetAxisRaw("Horizontal")< 0)
+         {
+
+            Debug.Log("izquierda");
+            sis0Sprite.flipX = true;
+
+
+        }
+        else if(sis0 == true && Input.GetAxisRaw("Horizontal") > 0)
+        {
+            Debug.Log("Derecha");
+
+            sis0Sprite.flipX = false;
+
+        }
+        if (sis1 == true && Input.GetAxisRaw("Horizontal") < 0)
+        {
+
+            Debug.Log("izquierda");
+
+            sis1Sprite.flipX = true;
+
+        }
+        else if (sis1 == true && Input.GetAxisRaw("Horizontal") > 0)
+        {
+            Debug.Log("Derecha");
+            sis1Sprite.flipX = false;
+        }
 
         if (Input.GetKey(KeyCode.E))
         {
@@ -97,19 +166,53 @@ public class IsometricMovement : MonoBehaviour {
         //cam.transform.position = Vector3.Lerp(transform.position,)
 
 
+       /* Ray mouseraye = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if(Input.GetMouseButtonDown(0))
+        {
+            transform.LookAt(mouseraye.direction);
+
+            Instantiate(bullet);
+        }*/
+
+        if (Input.GetButtonDown("Fire1") && sis1 ==true)
+        {
+            anim.SetTrigger("Shoot");
+             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+             if (Physics.Raycast(ray))
+                 Instantiate(bullet, transform.position, transform.rotation);
+            moveSpeed = 0;
+            //transform.LookAt(Input.mousePosition);
+            // BallThrow();
+        }
+        else { moveSpeed = 100; }
+        if(Input.GetButtonDown("Fire1") && sis0 == true)
+        { moveSpeed = 200;
+            anim.SetTrigger("Shoot");
+           
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray))
+                Instantiate(bullet0, transform.position, transform.rotation);
+            moveSpeed = 0;
+        }
+        //float midPount = (transform.position = Camera.main.transform.position).magnitude * 0.5f;
+
+        //transform.LookAt(mouseraye.origin + mouseraye.direction * midPount);
+
+
+
 
         if (Input.anyKey)
         {
             Move();
          }
-               
-        
-        
-       
-            
 
 
-        if (sis0 == false)
+
+
+
+
+
+            if (sis0 == false)
         {
             sis0Obj.SetActive(false);
 
@@ -157,18 +260,13 @@ public class IsometricMovement : MonoBehaviour {
             
         }
 
-        if (sis0Life >= 0 && sis1Life >= 0)
+        if (sis0Life >= 0 || sis1Life >= 0)
         {
             if (Input.GetKeyDown(KeyCode.Y))
             {
-                sis0 = !sis0;
-                sis1 = !sis1;
-
-                Sprite tmp = sis0img.sprite;
-                sis0img.sprite = sis1img.sprite;
-                sis1img.sprite = tmp;
 
 
+                ChangeHud();
                 //usar bilboard para ver las imagenes a la camara siempre al frente 
 
 
@@ -191,5 +289,53 @@ public class IsometricMovement : MonoBehaviour {
         transform.position += upMovement;
 
     }
+    void ChangeHud()
+    {
+        sis0 = !sis0;
+        sis1 = !sis1;
 
+        Sprite tmp = sis0img.sprite;
+        sis0img.sprite = sis1img.sprite;
+        sis1img.sprite = tmp;
+    }
+
+    void OnTriggerEnter(Collider collision)
+    {
+        if(collision.gameObject.CompareTag("Bullet"))
+        {
+
+            if(sis1==true)
+            {
+                sis1Life-=10;
+            }
+            else if(sis0==true)
+            {
+                sis0Life-=10;
+            }
+
+        }
+    }
+
+    void BallThrow()
+    {
+
+        Vector3 myPos = transform.position;
+        float dist = Camera.main.transform.position.y - myPos.y;
+        float x = Input.mousePosition.x;
+        float y = Input.mousePosition.y;
+        Vector3 dir = Camera.main.ScreenToWorldPoint(new Vector3(x, y, dist)) - myPos;
+        GameObject projectile = (GameObject)Instantiate(bullet);
+
+        Rigidbody rigidbody = projectile.GetComponent<Rigidbody>();
+        rigidbody.velocity = dir.normalized * 5.0f;
+
+        Vector3.RotateTowards(projectile.transform.forward, dir, 5.0f * Time.deltaTime, 0.0f);
+    }
+
+    IEnumerator Example()
+    {
+        
+        yield return new WaitForSeconds(3);
+        primerdialogo.SetActive(false);
+    }
 }

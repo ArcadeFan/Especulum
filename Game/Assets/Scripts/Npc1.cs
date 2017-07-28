@@ -9,6 +9,8 @@ public class Npc1 : MonoBehaviour {
     public int ID;
     public int IDAdd;
     public DBObjects DB;
+    public GameObject dialogo1;
+    public GameObject dialogo2;
 
 
     // Use this for initialization
@@ -16,7 +18,7 @@ public class Npc1 : MonoBehaviour {
     {
 
         JI = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-        DB = GameObject.Find("DBObjects").GetComponent<DBObjects>();
+        //DB = GameObject.Find("DBObjects").GetComponent<DBObjects>();
     }
 
     // Update is called once per frame
@@ -29,8 +31,11 @@ public class Npc1 : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
 
+
         if (other.CompareTag("Player"))
         {
+
+            
             for (int i = 0; i < JI.objetos.Length; i++)
             {
 
@@ -39,6 +44,7 @@ public class Npc1 : MonoBehaviour {
                     Destroy(gameObject);
                 }*/
 
+
                 if (JI.Buscar(ID))
                 {
 
@@ -46,13 +52,21 @@ public class Npc1 : MonoBehaviour {
 
                     JI.AgregarObjeto(IDAdd);
 
-
+                    dialogo2.SetActive(true);
 
                 }
+                else { dialogo1.SetActive(true); }
 
             }
             
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+
+        dialogo1.SetActive(false);
+        dialogo2.SetActive(false);
+        
     }
 
 

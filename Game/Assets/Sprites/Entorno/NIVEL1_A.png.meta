@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 95658e00f59dffd43b93157c9b3f1bad
-timeCreated: 1500258761
+timeCreated: 1500525096
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -10,6 +10,9 @@ TextureImporter:
     21300006: NIVEL1_A_3
     21300008: NIVEL1_A_4
     21300010: NIVEL1_A_5
+    21300012: NIVEL1_A_6
+    21300014: NIVEL1_A_7
+    21300016: NIVEL1_A_8
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -92,7 +95,7 @@ TextureImporter:
         width: 105
         height: 255
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -105,7 +108,7 @@ TextureImporter:
         width: 107
         height: 311
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -118,7 +121,7 @@ TextureImporter:
         width: 57
         height: 61
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -131,7 +134,7 @@ TextureImporter:
         width: 206
         height: 383
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -144,7 +147,7 @@ TextureImporter:
         width: 628
         height: 492
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -156,6 +159,45 @@ TextureImporter:
         y: 1880
         width: 243
         height: 366
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NIVEL1_A_6
+      rect:
+        serializedVersion: 2
+        x: 1802
+        y: 2098
+        width: 656
+        height: 638
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NIVEL1_A_7
+      rect:
+        serializedVersion: 2
+        x: 2474
+        y: 1944
+        width: 907
+        height: 868
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: NIVEL1_A_8
+      rect:
+        serializedVersion: 2
+        x: 3749
+        y: 952
+        width: 788
+        height: 796
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
